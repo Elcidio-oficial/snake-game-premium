@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>SNAKE — Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-CQsW6ift.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-kbYuDaNu.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ==================== HOME SCREEN ==================== -->
+    <div id="home-screen" class="screen active">
+      <div class="home-bg">
+        <div class="home-bg-gradient"></div>
+        <div class="home-bg-pattern"></div>
+      </div>
+
+      <div class="home-container">
+        <!-- Logo -->
+        <div class="home-logo">
+          <div class="logo-snake-animated">
+            <svg viewBox="0 0 100 50" fill="none" class="snake-logo-svg">
+              <path class="logo-body-path" d="M10 30 Q20 12, 32 25 Q44 38, 52 22 Q60 6, 72 22 Q80 32, 88 25" 
+                    stroke="var(--snake-body)" stroke-width="8" stroke-linecap="round" fill="none"/>
+              <ellipse class="logo-head-el" cx="90" cy="24" rx="8" ry="7" fill="var(--snake-head)"/>
+              <circle cx="93" cy="22" r="2.5" fill="var(--bg-primary)"/>
+              <circle cx="94" cy="21.5" r="1" fill="var(--snake-head)"/>
+              <path class="logo-tongue-path" d="M98 24 L105 21 M98 24 L105 27" stroke="var(--food-primary)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h1 class="home-title">SNAKE</h1>
+          <span class="home-edition">PREMIUM</span>
+        </div>
+
+        <!-- Main Actions -->
+        <div class="home-actions">
+          <button id="play-btn" class="btn-play">
+            <svg class="btn-play-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M6 4L20 12L6 20V4Z" fill="currentColor"/>
+            </svg>
+            <span>Jogar</span>
+          </button>
+
+          <button id="settings-btn" class="btn-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+            <span>Configurações</span>
+          </button>
+        </div>
+
+        <!-- Highscore -->
+        <div class="home-highscore">
+          <div class="hs-icon">🏆</div>
+          <div class="hs-content">
+            <span class="hs-label">Melhor Pontuação</span>
+            <span class="hs-value" id="home-highscore">0</span>
+          </div>
+        </div>
+
+        <!-- Quick Info -->
+        <div class="home-footer">
+          <span class="footer-hint">Pressione <kbd>ENTER</kbd> para jogar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SETTINGS SCREEN ==================== -->
+    <div id="settings-screen" class="screen">
+      <div class="settings-container">
+        <!-- Header -->
+        <div class="settings-header">
+          <button id="settings-back-btn" class="btn-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <h2 class="settings-title">Configurações</h2>
+          <div class="settings-header-space"></div>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="settings-content">
+          
+          <!-- Themes Section -->
+          <section class="settings-section">
+            <div class="section-header">
+              <span class="section-icon">🎨</span>
+              <h3 class="section-title">Temas</h3>
+            </div>
+            <div class="theme-grid" id="theme-selector">
+              <!-- Preenchido via JS -->
+            </div>
+          </section>
+
+          <!-- Game Settings Section -->
+          <section class="settings-section">
+            <div class="section-header">
+              <span class="section-icon">🎮</span>
+              <h3 class="section-title">Jogo</h3>
+            </div>
+
+            <div class="settings-options">
+              <!-- Velocidade -->
+              <div class="option-group">
+                <label class="option-label">Velocidade</label>
+                <div class="option-buttons">
+                  <button class="opt-btn" data-speed="easy">Fácil</button>
+                  <button class="opt-btn active" data-speed="normal">Normal</button>
+                  <button class="opt-btn" data-speed="hard">Difícil</button>
+                  <button class="opt-btn" data-speed="insane">Insano</button>
+                </div>
+              </div>
+
+              <!-- Tamanho -->
+              <div class="option-group">
+                <label class="option-label">Tamanho da Grade</label>
+                <div class="option-buttons">
+                  <button class="opt-btn" data-grid="small">15×15</button>
+                  <button class="opt-btn active" data-grid="medium">20×20</button>
+                  <button class="opt-btn" data-grid="large">25×25</button>
+                </div>
+              </div>
+
+              <!-- Paredes -->
+              <div class="option-group horizontal">
+                <label class="option-label">Paredes</label>
+                <div class="toggle-wrapper">
+                  <span class="toggle-status" id="wall-label">Ativadas</span>
+                  <button class="toggle-switch active" id="wall-toggle">
+                    <span class="toggle-thumb"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Controls Info -->
+          <section class="settings-section">
+            <div class="section-header">
+              <span class="section-icon">⌨️</span>
+              <h3 class="section-title">Controles</h3>
+            </div>
+            <div class="controls-grid">
+              <div class="control-item">
+                <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
+                <span>ou</span>
+                <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>
+                <label>Mover</label>
+              </div>
+              <div class="control-item">
+                <kbd>P</kbd>
+                <label>Pausar</label>
+              </div>
+              <div class="control-item">
+                <kbd>ESC</kbd>
+                <label>Menu</label>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== GAME SCREEN ==================== -->
+    <div id="game-screen" class="screen">
+      <div class="game-layout">
+        <div class="game-header">
+          <div class="header-left">
+            <button id="back-btn" class="icon-btn" title="Menu">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="header-center">
+            <div class="score-display">
+              <div class="score-block">
+                <span class="score-label">PONTOS</span>
+                <span class="score-value" id="score">0</span>
+              </div>
+              <div class="score-divider"></div>
+              <div class="score-block">
+                <span class="score-label">RECORDE</span>
+                <span class="score-value dim" id="highscore">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="header-right">
+            <button id="pause-btn" class="icon-btn" title="Pausar (P)">
+              <svg class="pause-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="5" y="4" width="3" height="12" rx="1" fill="currentColor"/>
+                <rect x="12" y="4" width="3" height="12" rx="1" fill="currentColor"/>
+              </svg>
+              <svg class="play-icon hidden" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M6 4L16 10L6 16V4Z" fill="currentColor"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="canvas-wrapper">
+          <canvas id="game-canvas"></canvas>
+          
+          <!-- PAUSE -->
+          <div id="pause-overlay" class="overlay hidden">
+            <div class="overlay-content">
+              <div class="overlay-icon">⏸</div>
+              <h2>Pausado</h2>
+              <p>Pressione <kbd>P</kbd> ou clique para continuar</p>
+            </div>
+          </div>
+          
+          <!-- GAME OVER -->
+          <div id="gameover-overlay" class="overlay hidden">
+            <div class="overlay-content">
+              <div class="overlay-icon">💀</div>
+              <h2>Game Over</h2>
+              <div class="final-score">
+                <span class="fs-value" id="final-score">0</span>
+                <span class="fs-label">pontos</span>
+              </div>
+              <div class="new-record hidden" id="new-record">🏆 Novo Recorde!</div>
+              <div class="overlay-buttons">
+                <button id="retry-btn" class="btn-play small">
+                  <span>Jogar Novamente</span>
+                  <kbd>ENTER</kbd>
+                </button>
+                <button id="menu-btn" class="btn-secondary">
+                  <span>Menu</span>
+                  <kbd>ESC</kbd>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+          <div class="dpad">
+            <button class="dpad-btn up" data-dir="up">
+              <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 6L18 14H6L12 6Z" fill="currentColor"/></svg>
+            </button>
+            <button class="dpad-btn left" data-dir="left">
+              <svg width="24" height="24" viewBox="0 0 24 24"><path d="M6 12L14 6V18L6 12Z" fill="currentColor"/></svg>
+            </button>
+            <button class="dpad-btn right" data-dir="right">
+              <svg width="24" height="24" viewBox="0 0 24 24"><path d="M18 12L10 6V18L18 12Z" fill="currentColor"/></svg>
+            </button>
+            <button class="dpad-btn down" data-dir="down">
+              <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 18L6 10H18L12 18Z" fill="currentColor"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
